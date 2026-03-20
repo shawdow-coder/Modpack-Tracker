@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Track Issue</title>
+
+<style>
+body {
+    background: #0f2027;
+    color: white;
+    font-family: Arial;
+    text-align: center;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+input {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+}
+
+button {
+    padding: 10px;
+    margin-left: 10px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+.card {
+    margin-top: 20px;
+    background: rgba(255,255,255,0.1);
+    padding: 20px;
+    border-radius: 10px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+    <h1>🔍 Track Your Issue</h1>
+
+    <input id="ticket" placeholder="Enter Ticket ID">
+    <button onclick="track()">Check</button>
+
+    <div id="result"></div>
+</div>
+
+<script>
+async function track() {
+    const id = document.getElementById("ticket").value;
+
+    const res = await fetch("http://localhost:3000/track/" + id);
+    const data = await res.json();
+
+   if (!data || !data.ticketId) {
+        document.getElementById("result").innerHTML = "❌ Not found";
+        return;
+    }
+
+    document.getElementById("result").innerHTML = `
+        <div class="card">
+            <h3>${data.type}</h3>
+            <p>${data.description}</p>
+            <p><b>Reply:</b> ${data.reply || "No reply yet"}</p>
+        </div>
+    `;
+}
+</script>
+
+</body>
+</html>

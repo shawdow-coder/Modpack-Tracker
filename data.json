@@ -1,0 +1,24 @@
+[
+  {
+    "id": "ed19c3dc-436f-4956-9bdb-011be1220127",
+    "ticketId": "d30a80ef",
+    "name": "AI chatbot",
+    "type": "Issue",
+    "description": "yutvybh",
+    "image": "1774023984126-time table .jpg",
+    "reply": "",
+    "status": "Open",
+    "createdAt": "2026-03-20T16:26:24.196Z"
+  },
+  {
+    "id": "363587f9-d797-4616-bd94-06bb798f6334",
+    "ticketId": "451c2f6d",
+    "name": "Sameer",
+    "type": "Suggestion",
+    "description": "uftgyhnjm",
+    "image": "1774024078858-time table .jpg",
+    "reply": "",
+    "status": "Open",
+    "createdAt": "2026-03-20T16:27:58.884Z"
+  }
+]

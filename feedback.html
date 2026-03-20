@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modpack Feedback</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+        color: white;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 25px;
+        background: rgba(255,255,255,0.1);
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-top: 15px;
+        font-weight: bold;
+    }
+
+    input, select, textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 100px;
+    }
+
+    input[type="file"] {
+        background: white;
+        color: black;
+    }
+
+    button {
+        margin-top: 20px;
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 10px;
+        background: #00c6ff;
+        color: black;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: #00a2d4;
+    }
+
+    .success {
+        margin-top: 15px;
+        text-align: center;
+        color: lightgreen;
+        display: none;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>📦 Modpack Feedback</h1>
+
+    <form id="feedbackForm">
+        
+        <label>Name (optional)</label>
+        <input type="text" id="name">
+
+        <label>Type</label>
+        <select id="type" required>
+            <option value="">Select...</option>
+            <option>Bug</option>
+            <option>Issue</option>
+            <option>Suggestion</option>
+            <option>Other</option>
+        </select>
+
+        <label>Description</label>
+        <textarea id="description" placeholder="Explain clearly what happened..." required></textarea>
+
+        <label>Upload Screenshot (optional)</label>
+        <input type="file" id="image" accept="image/*">
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <div class="success" id="successMsg">
+        ✅ Feedback submitted!
+    </div>
+</div>
+
+<script>
+document.getElementById("feedbackForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    try {
+        const form = document.getElementById("feedbackForm");
+
+        const formData = new FormData();
+        formData.append("name", document.getElementById("name").value);
+        formData.append("type", document.getElementById("type").value);
+        formData.append("description", document.getElementById("description").value);
+
+        const file = document.getElementById("image").files[0];
+        if (file) formData.append("image", file);
+
+        const res = await fetch("http://localhost:3000/submit", {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await res.json();
+
+        alert("🎫 Your Ticket ID: " + data.ticketId);
+        form.reset();
+
+    } catch (err) {
+        alert("❌ Error! Check console");
+        console.error(err);
+    }
+});
+</script>
+</body>
+</html>
