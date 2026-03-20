@@ -53,7 +53,7 @@ button {
 async function track() {
     const id = document.getElementById("ticket").value;
 
-    const res = await fetch("https://modpack-tracker.onrender.com" + id);
+    const res = await fetch("https://modpack-tracker-6fuz.onrender.com/track/" + id);
     const data = await res.json();
 
    if (!data || !data.ticketId) {

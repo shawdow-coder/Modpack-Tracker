@@ -61,7 +61,7 @@ button {
 
 <script>
 async function loadData() {
-    const res = await fetch("https://modpack-tracker.onrender.com/feedback");
+    const res = await fetch("https://modpack-tracker-6fuz.onrender.com/feedback");
     const data = await res.json();
 
     const container = document.getElementById("list");
@@ -75,7 +75,7 @@ async function loadData() {
             <h3>${item.type} (ID: ${item.ticketId})</h3>
 <p>${item.description}</p>
 <p><b>Status:</b> ${item.status}</p>
-            ${item.image ? `<img src="https://modpack-tracker.onrender.com/uploads/${item.image}" width="200">` : ""}
+            ${item.image ? `<img src="https://modpack-tracker-6fuz.onrender.com/uploads/${item.image}" width="200">` : ""}
 
             <br><br>
             <input id="reply-${item._id}" placeholder="Write reply...">
@@ -96,7 +96,7 @@ async function loadData() {
 async function sendReply(id) {
     const text = document.getElementById("reply-" + id).value;
 
-    await fetch("https://modpack-tracker.onrender.com/reply/" + id, {
+    await fetch("https://modpack-tracker-6fuz.onrender.com/reply/" + id, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ reply: text })
@@ -107,7 +107,7 @@ async function sendReply(id) {
 
 loadData();
 async function updateStatus(id, status) {
-    await fetch("https://modpack-tracker.onrender.com/status/" + id, {
+    await fetch("https://modpack-tracker-6fuz.onrender.com/status/" + id, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status })
