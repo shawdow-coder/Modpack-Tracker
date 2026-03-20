@@ -126,7 +126,7 @@ document.getElementById("feedbackForm").addEventListener("submit", async functio
         const file = document.getElementById("image").files[0];
         if (file) formData.append("image", file);
 
-        const res = await fetch("http://localhost:3000/submit", {
+        const res = await fetch("https://modpack-tracker.onrender.com", {
             method: "POST",
             body: formData
         });
